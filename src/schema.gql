@@ -1,0 +1,252 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Auth {
+  """Id of the user"""
+  id: ID!
+
+  """Name of the user!"""
+  name: String!
+
+  """Email of the user"""
+  email: String!
+
+  """Password of the user!"""
+  password: String!
+
+  """Role of the user"""
+  role: UserRole!
+
+  """Time of the user"""
+  createdAt: DateTime!
+
+  """Status of the user"""
+  isDeleted: Boolean!
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthResponse {
+  """Token of the user!"""
+  accessToken: String!
+}
+
+type User {
+  """Id of the user"""
+  id: ID!
+
+  """Name of the user"""
+  name: String!
+
+  """Email of the user!"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Role of the user"""
+  role: UserRole!
+
+  """Time of the user"""
+  createdAt: DateTime!
+
+  """Status of the user"""
+  isDeleted: Boolean!
+}
+
+type Book {
+  """Example field (placeholder)"""
+  id: Int!
+
+  """Title of the book!"""
+  title: String!
+
+  """Author of the book"""
+  author: String!
+
+  """Description of the book"""
+  description: String!
+
+  """Price of the book!"""
+  price: Float!
+  created_at: DateTime!
+
+  """Status of the book"""
+  isActive: Boolean!
+}
+
+type Order {
+  """Id of the order"""
+  id: ID!
+
+  """User of the order"""
+  user: User!
+
+  """Book of the order"""
+  books: [Book!]!
+
+  """Total price of the order"""
+  total_price: Float!
+
+  """Time of the order"""
+  created_at: DateTime!
+
+  """Status of the order"""
+  isDeleted: Boolean!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  orders: [Order!]!
+  order(id: Int!): Order!
+  books: [Book!]!
+  book(id: Int!): Book!
+}
+
+type Mutation {
+  register(createAuthInput: CreateAuthInput!): Auth!
+  login(loginAuthDto: LoginAuthDto!): AuthResponse!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!, id: Float!): User!
+  removeUser(id: Int!): User!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!, id: Float!): Order!
+  removeOrder(id: Int!): Order!
+  createBook(createBookInput: CreateBookInput!): Book!
+  updateBook(updateBookInput: UpdateBookInput!, id: Float!): Book!
+  removeBook(id: Int!): Book!
+}
+
+input CreateAuthInput {
+  """Name of the string"""
+  name: String!
+
+  """Email of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Role of the user"""
+  role: UserRole! = USER
+
+  """refreshToken of the user"""
+  refreshToken: String
+
+  """Status of the user"""
+  isDeleted: Boolean = false
+}
+
+input LoginAuthDto {
+  """Email of the user!"""
+  email: String!
+
+  """Password of the user!"""
+  password: String!
+}
+
+input CreateUserInput {
+  """Name of the string"""
+  name: String!
+
+  """Email of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
+
+  """Role of the user"""
+  role: UserRole! = USER
+
+  """refreshToken of the user"""
+  refreshToken: String
+
+  """Status of the user"""
+  isDeleted: Boolean = false
+}
+
+input UpdateUserInput {
+  """Name of the string"""
+  name: String
+
+  """Email of the user"""
+  email: String
+
+  """Password of the user"""
+  password: String
+
+  """Role of the user"""
+  role: UserRole = USER
+
+  """refreshToken of the user"""
+  refreshToken: String
+
+  """Status of the user"""
+  isDeleted: Boolean = false
+}
+
+input CreateOrderInput {
+  """Books of the order"""
+  books: [Int!]!
+
+  """Total price of the order"""
+  total_price: Float!
+
+  """Status of the order"""
+  isDeleted: Boolean = false
+}
+
+input UpdateOrderInput {
+  """Books of the order"""
+  books: [Int!]
+
+  """Total price of the order"""
+  total_price: Float
+
+  """Status of the order"""
+  isDeleted: Boolean = false
+}
+
+input CreateBookInput {
+  """Title of the book!"""
+  title: String!
+
+  """Author of the book"""
+  author: String!
+
+  """Description of the book"""
+  description: String!
+
+  """Price of the book"""
+  price: Float!
+
+  """Status of the book"""
+  isDeleted: Boolean = false
+}
+
+input UpdateBookInput {
+  """Title of the book!"""
+  title: String
+
+  """Author of the book"""
+  author: String
+
+  """Description of the book"""
+  description: String
+
+  """Price of the book"""
+  price: Float
+
+  """Status of the book"""
+  isDeleted: Boolean = false
+}
